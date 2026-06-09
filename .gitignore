@@ -7,6 +7,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
+# Sensitive files
+generate-schema.ps1
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -35,9 +38,6 @@ ScaffoldingReadMe.txt
 *.nupkg
 # NuGet Symbol Packages
 *.snupkg
-
-# dotenv environment variables file
-.env
 
 # Others
 ~$*
