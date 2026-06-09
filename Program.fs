@@ -6,15 +6,17 @@ let correlatedQueryWithMaxBy =
     let innerQuery =
         select {
             for inner in dbo.CorrelatedQueryTestTable do
-                correlate outer in dbo.CorrelatedQueryTestTable
-                where (inner.field1 = outer.field1 && inner.field2 = outer.field2 && inner.field3 = 5.0)
-                select inner.timestamp
+                correlate row in dbo.CorrelatedQueryTestTable
+
+                where (inner.field1 = row.field1 && inner.field2 = row.field2 && inner.field3 < 10.0)
+
+                select (maxBy inner.timestamp)
         }
 
     let qry =
         select {
             for row in dbo.CorrelatedQueryTestTable do
-                where (row.timestamp = maxBy (subqueryOne innerQuery))
+                where (row.field3 > 1.0 && row.timestamp = subqueryOne innerQuery)
                 select row
         }
 
